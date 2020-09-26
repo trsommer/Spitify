@@ -1,4 +1,4 @@
-# A spotify-like app based on Youtube's data API and the Spotify API
+# A spotify-like app based the Spotify API and Youtube audio streaming
 
 ## Features
 * Ad-free music listening experience
