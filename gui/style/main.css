@@ -1,5 +1,3 @@
-
-
 body {
     background: #202020;
     margin: 0;
@@ -16,21 +14,6 @@ body::-webkit-scrollbar {
   body::-webkit-scrollbar-track {
     background: #4B74F5;        /* color of the tracking area */
   }
-
-#titlebar {
-    height: 23px;
-    background: #353535;
-    -webkit-app-region: drag;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: sans-serif;
-    color: white;
-    font-size: 13px;
-    width: 100%;
-    position: fixed;
-    z-index: 1;
-}
 
 #player_container {
     height: 60px;
@@ -59,7 +42,7 @@ body::-webkit-scrollbar {
 
 #media_controls {
     height: 100%;
-    width: 70%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -75,7 +58,7 @@ body::-webkit-scrollbar {
 }
 
 #song_media {
-    width: 15%;
+    width: 20%;
     height: 100%;
     color: white;
     display: flex;
@@ -84,7 +67,7 @@ body::-webkit-scrollbar {
 }
 
 #volume_controls {
-    width: 15%;
+    width: 20%;
     height: 100%;
     display: flex;
     align-items: center;
@@ -238,6 +221,20 @@ body::-webkit-scrollbar {
     margin-left: 15px;
 }
 
+#shorten_icon {
+    opacity: 0.8;
+    margin-right: 15px;
+
+}
+
+#shorten_icon:hover {
+    opacity: 1;
+    height: 20px;
+    width: 20px;
+    margin-right: 13px;
+    
+}
+
 #volume_controls_slider {
     height: 4px;
     width: 100%;
@@ -258,7 +255,7 @@ body::-webkit-scrollbar {
 #volume_controls_slider_progress {
     width: 50%;
     height: 100%;
-    background: white;
+    background: #4B74F5;
 }
 
 #volume_controls_slider_progress:hover {
@@ -277,7 +274,6 @@ body::-webkit-scrollbar {
 #main {
     width: 100%;
     height: 100vh;
-    padding-top: 23px;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -288,6 +284,7 @@ body::-webkit-scrollbar {
     background: black;
     position: fixed;
     height: 100%;
+    padding-top: 20px;
 
 }
 
@@ -320,6 +317,7 @@ body::-webkit-scrollbar {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    height: 72px;
 }
 
 .sidebar_container {
@@ -380,6 +378,7 @@ body::-webkit-scrollbar {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
 }
 
 #search_main {
@@ -387,12 +386,10 @@ body::-webkit-scrollbar {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 18px;
     height: 25px;
-    margin: 10px;
     margin-left: 35px;
     border: none;
     padding-left: 8px;
     color: #202020;
-    position: fixed;
     z-index: 1;
 }
 
@@ -400,11 +397,11 @@ body::-webkit-scrollbar {
     font-family: sans-serif;
     color: white;
     width: 100%;
-    padding-bottom: 100px;
     display: none;
+    margin-top: 100px;
 }
 
-#artist_page_heading_text {
+#artist_page_heading{
     font-size: 72px;
     margin: 0;
     font-weight: bold;
@@ -425,7 +422,9 @@ body::-webkit-scrollbar {
 
 #artist_page_bg_img {
     width: 100%;
-    z-index: -1;
+    z-index: -2;
+    position: absolute;
+    top: 0;
 
 }
 
@@ -436,19 +435,19 @@ body::-webkit-scrollbar {
 
 }
 
-#artist_page_heading {
+#artist_page_heading_container {
     position: absolute;
-    top: 175px;
+    top: 275px;
     margin-left: 30px;
 }
 
 #artist_page_overlay_main {
     width: 100%;
     position: absolute;
-    height: 300px;
+    height: 400px;
     background: black;
     opacity: 0.5;
-    top: 23px;
+    top: 0;
 
 }
 
@@ -464,7 +463,7 @@ body::-webkit-scrollbar {
     height: 100px;
     position: absolute;
     width: 100%;
-    top: 223px;
+    top: 323px;
     background: rgb(32,32,32);
     background: linear-gradient(180deg, rgba(32,32,32,0) 0%, rgba(32,32,32,1) 80%);
 }
@@ -473,11 +472,13 @@ body::-webkit-scrollbar {
     position: absolute;
     display: flex;
     flex-direction: row;
-    top: 270px;
-    z-index: 2;
+    top: 370px;
 }
 
-#artist_page_button_area > button {
+.artist_page_button_area_play {
+    margin-left: 35px;
+    background: #4B74F5;
+    color: white;
     font-family: sans-serif;
     height: 25px;
     padding-left: 30px;
@@ -487,24 +488,24 @@ body::-webkit-scrollbar {
     cursor: pointer;
 }
 
-#artist_page_button_area_play {
+.artist_page_button_area_follow {
     margin-left: 35px;
-    background: #4B74F5;
-    color: white;
-
-}
-
-#artist_page_button_area_follow {
-    margin-left: 20px;
     background: #F2074C;
     color: white;
-
+    font-family: sans-serif;
+    height: 25px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 18px;
+    border: none;
+    cursor: pointer;
 }
 
 #artist_page_menu_container {
     height: 50px;
     margin-left: 35px;
     width: auto;
+    position: absolute;
 }
 
 #artist_page_menu {
@@ -528,9 +529,11 @@ body::-webkit-scrollbar {
 
 #artist_page_overview {
     display: block;
-    margin-left: 35px;
-    margin-top: 15px;
-    margin-right: 47px;
+    padding-left: 35px;
+    padding-top: 65px;
+    padding-right: 47px;
+    background: #202020;
+    padding-bottom: 600px;
 }
 
 #artist_page_songs_top {
@@ -558,7 +561,6 @@ body::-webkit-scrollbar {
     width: 80px;
     height: 80px;
     background: red;
-    border-radius: 10px;
 }
 
 #artist_page_new_release_text {
@@ -633,7 +635,15 @@ body::-webkit-scrollbar {
 
 #artist_page_wofl {
     display: none;
+    background: #202020;
+    padding-top: 65px;
+    width: 100%;
+    padding-bottom: 500px;
+    padding-left: 20px;
+}
 
+#artist_page_wofl > p{
+    padding-left: 15px;
 }
 
 #artist_page_info {
@@ -649,6 +659,7 @@ body::-webkit-scrollbar {
     color: white;
     margin-top: 80px;
     display: none;
+    margin-top: 100px;
 }
 
 .heading_medium {
@@ -690,18 +701,63 @@ body::-webkit-scrollbar {
     font-family: sans-serif;
     color: white;
     margin-top: 80px;
+    margin-top: 100px;
+}
 
+
+
+@media only screen and (max-width: 1350px) {
+    #search_results_container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    
+    }
+
+    #search_results_container > div {
+        width: 80%;
+    }
+
+    #search_results_container > div > hr {
+        border: 1px solid white;
+        opacity: 0.5;
+    
+    }
+}
+
+@media only screen and (min-width: 1351px) {
+    #search_results_container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    
+    }
+
+    #search_results_container > div {
+        width: 500px;
+    }
+
+    #search_results_container > div > hr {
+        border: 1px solid white;
+        opacity: 0.5;
+        width: 80%;
+        margin-left: 0;
+    
+    }
 }
 
 .heading_small {
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
+    margin: 0;
+    margin-bottom: 5px;
 
 }
 
 #search_list {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 
 }
 
@@ -710,8 +766,9 @@ body::-webkit-scrollbar {
     flex-direction: row;
     align-items: center;
     justify-content: left;
-    margin-right: 30px;
-
+    margin-bottom: 25px;
+    margin-right: 50px;
+    cursor: pointer;
 
 }
 
@@ -722,8 +779,181 @@ body::-webkit-scrollbar {
 
 }
 
-.search_item_p {
+.search_item_name {
+    margin: 5px;
     margin-left: 25px;
+}
 
+.search_item_artist {
+    margin: 5px;
+    margin-left: 25px;
+    font-size: 12px;
+    color: grey;
+}
+
+#shorten_timeline {
+    width: 60%;
+    border-radius: 8px;
+    height: 40px;
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 100px;
+    z-index: 3;
+    display: none;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#timeline_active {
+
+    background-color: #4B74F5;
+    height: 80%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+
+}
+
+
+#timeline {
+    width: 100%;
+    background: white;
+    height: 2px;
+    z-index: 4;
+}
+
+.timeline_marker {
+    height: 50px;
+    background: #202020;
+    width: 4px;
+    position: absolute;
+    z-index: 4;
+    margin-top: -10px;
+
+}
+
+#search_container {
+    height: 72px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    -webkit-app-region: drag;
+    margin-top: 0;
+    animation-fill-mode: forwards;
+
+}
+
+#search_container_bg{
+    position: absolute;
+    width: 100%;
+    height: 95px;
+    margin-top: -23px;
+    background: #202020;
+    padding-bottom: 40px;
+    z-index: -1;
+    opacity: 0;
+}
+
+
+.icon_small {
+    height: 18px;
+    width: 18px;
+    cursor: pointer;
+
+}
+
+.icon_search {
+    margin-left: 30px;
+    opacity: 0.8;
+
+}
+
+.icon_search:hover {
+    opacity: 1;
+    height: 20px;
+    width: 20px;
+    margin-left: 28px;
+    cursor: pointer;
+
+}
+
+#heading_scroll {
+    padding-left: 35px;
+    color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 16pt;
+    margin: 0;
+    opacity: 0;
+    padding-top: -15px;
+}
+
+#button_scroll1 {
+    opacity: 0;
+    padding-top: -15px;
+}
+
+#button_scroll2 {
+    opacity: 0;
+    padding-top: -15px;
+}
+
+.artist_overview_tile {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 20px;
+}
+
+.artist_overview_tile_item {
+    width: 200px;
+    height: 200px;
+    background: #353535;
+    border-radius: 5px;
+    margin: 15px;
+}
+
+.artist_overview_tile_item > img {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+
+}
+
+.artist_overview_tile_item_overlay {
+    background: rgba(0, 0, 0, 0);
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    opacity: 0;
+    cursor: pointer;
+
+
+}
+
+.artist_overview_tile_item_overlay > p {
+    color: white;
+    font-family: sans-serif;
+    position: absolute;
+    font-size: 15pt;
+}
+
+.artist_overview_tile_item_overlay > img {
+    width: 74px;
+    opacity: 0.6;
+
+}
+
+.artist_overview_tile_item_overlay:hover {
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 1;
 
 }

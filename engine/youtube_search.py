@@ -1,19 +1,13 @@
-from googleapiclient.discovery import build
+#https://github.com/alexmercerind/youtube-search-python
+from youtubesearchpython import SearchVideos
+import json
 
 def searchYT(query):
 
-    api_key = 'AIzaSyAsDIK2YPLUstWqgC_SUHdkKwmGFn35Lss'
+    search = SearchVideos(query, offset = 1, mode = "json", max_results = 1)
 
-    youtube = build('youtube', 'v3', developerKey=api_key)
+    search_array = json.loads(search.result())
+    
+    link = search_array['search_result'][0]['link']
 
-    request = search_response = youtube.search().list(
-                q="BTS Dynamite",
-                part="id,snippet",
-                maxResults=1
-            )
-
-    response = request.execute()
-
-    videoId = response['items'][0]['id']['videoId']
-
-    return videoId
+    return link

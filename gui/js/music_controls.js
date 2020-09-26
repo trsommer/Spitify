@@ -1,12 +1,16 @@
-window.onload = init
 
-var saved_volume = 0
-
-function init() {
-    var music = document.getElementById('audio_player');
-    music.addEventListener("timeupdate", timeUpdate, false)
-    
+saved_volume = 0
+repeat = false
+shuffle = false
+nextSong = {
+    "songURL":  [],
+    "songname": [],
+    "artist":   [],
+    "coverImg": [],
+    "liked":    [],
 }
+
+currentSong = 0
 
 function progressbar_click(id_parent, id_child) {
     console.log("click");
@@ -38,6 +42,22 @@ function changeMusicPlayState() {
     }
 }
 
+function playNextSong() {
+
+
+
+}
+
+function playSong(data) {
+
+    $('#song_cover').attr('src', data['coverImage'][1])
+    $('#song_title').html(data['trackName'])
+    $('#song_artist').html(data['artistName'][0])
+    var music = document.getElementById('audio_player');
+    music.src = data['url']
+    playMusic('play/pause')
+}
+
 function pauseMusic(id) {
     var music = document.getElementById('audio_player');
     music.pause()
@@ -52,6 +72,8 @@ function playMusic(id) {
     music.play()
     document.getElementById(id).src = "icons/pause.svg"
 }
+
+
 
 
 
@@ -97,19 +119,19 @@ function setVolume(value) {
         document.getElementById('volume_icon').src = "icons/volume/quiet.svg"
         playMusic('play/pause')
         console.log(value);
-        value = value * 100
-        document.getElementById('volume_controls_slider_progress').style.width = value + "%"
+        percentage = value * 100
+        document.getElementById('volume_controls_slider_progress').style.width = percentage + "%"
 
     } else {
 
         document.getElementById('volume_icon').src = "icons/volume/loud.svg"
         playMusic('play/pause')
-        value = value * 100
-        document.getElementById('volume_controls_slider_progress').style.width = value + "%"
+        percentage = value * 100
+        document.getElementById('volume_controls_slider_progress').style.width = percentage + "%"
 
     }
 
-    music.volume = value / 100
+    music.volume = value 
 
 }
 
@@ -151,12 +173,15 @@ function activate_repeat() {
     var music = document.getElementById('audio_player');
 
 
+
     if (src == "file:///Users/test/Documents/spitify/gui/icons/repeat.svg") {
         document.getElementById("icon_repeat").src = "icons/repeat_activated.svg"
         music.loop = true
+        repeat = true
     } else {
         document.getElementById("icon_repeat").src = "icons/repeat.svg"
         music.loop = false
+        repeat = false
 
     }
 }
@@ -166,10 +191,76 @@ function activate_shuffle() {
 
     if (src == "file:///Users/test/Documents/spitify/gui/icons/shuffle.svg") {
         document.getElementById("icon_shuffle").src = "icons/shuffle_activated.svg"
+        shuffle = true
     } else {
         document.getElementById("icon_shuffle").src = "icons/shuffle.svg"
+        shuffle = false
     }
 
 
 }
+
+function shorten_song() {
+    src = document.getElementById("shorten_icon").src
+
+    if (src == "file:///Users/test/Documents/spitify/gui/icons/shorten.svg") {
+        document.getElementById("shorten_icon").src = "icons/shorten_activated.svg"
+        shorten(true)
+    } else {
+        document.getElementById("shorten_icon").src = "icons/shorten.svg"
+        shorten(false)
+    }
+
+
+}
+
+function musicEnded()  {
+    
+    if (repeat == false && nextSong[currentSong + 1] == "") {
+        pauseMusic('play/pause')
+        currentSong = 0
+        nextSong =  []
+    } else if (!nextSong["songURL"][currentSong + 1] == "") {
+
+        tryNextSong = getNextSong()
+        var music = document.getElementById('audio_player');
+        music.src = nextSong
+
+        if (!tryNextSong == "") {
+            
+            nextSong = tryNextSong
+
+        }
+
+    }
+    
+}
+
+function getNextSong() {
+
+
+
+}
+
+function shorten(activated) {
+
+    if (activated == true) {
+        $('#controls').animate({
+            paddingTop: 120
+          }, 400, function() {
+          })
+    } else {
+        $('#controls').animate({
+            paddingTop: 5
+          }, 400, function() {
+          })
+
+
+    }
+
+
+}
+
+
+
 

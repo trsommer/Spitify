@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="style/main.css">
-  <script>if (typeof module === 'object') {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style/main.css">
+
+
+    <script>if (typeof module === 'object') {
       window.module = module
       module = undefined
   }
-  </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/progressbar.js"></script>
-<script>if(window.module) module = window.module</script>
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/jquery_colors.js"></script>
+    <script src="js/main_control_.js"></script>
+    <script>
+    if(window.module) module = window.module
+    </script>
 
   <title>Spitify</title>
 
 </head>
 <body id="body">
-<div id="titlebar">
-    Spitify
-</div>
 <div id="player_container">
-    <audio id="audio_player" src="https://r1---sn-8xgn5uxa-4g5l.googlevideo.com/videoplayback?expire=1598757359&ei=j8VKX92LGYXE1gLuyYzwDw&ip=2001:16b8:3086:3e00:d934:9679:37c2:7bb&id=o-AFHn5EajT3vYbeGhnRSbuUi2h_K6sZhPo94YrvSlxNC7&itag=251&source=youtube&requiressl=yes&mh=Zr&mm=31,29&mn=sn-8xgn5uxa-4g5l,sn-4g5e6nls&ms=au,rdu&mv=m&mvi=1&pl=40&initcwndbps=1341250&vprv=1&mime=audio/webm&gir=yes&clen=3697726&dur=227.361&lmt=1598282790753481&mt=1598735680&fvip=1&keepalive=yes&c=WEB&txp=5531432&sparams=expire,ei,ip,id,itag,source,requiressl,vprv,mime,gir,clen,dur,lmt&lsparams=mh,mm,mn,ms,mv,mvi,pl,initcwndbps&lsig=AG3C_xAwRAIgTPFg-VBW4pwFQTQtEdGmXIL69S5o-MFgnoMavIoMPEoCIFuP-MZHCJgjEsWEgVYacwl4zFPxZIzf0AVm5m4vCH-p&sig=AOq0QJ8wRQIhAPqEdzje-xnkp3DCWOLkTJYkccoNC9v74Xxbd8zdGugfAiB_VU4IN8uZUjtGWm1L3-9ThTr9t1pVHxmy7eILS_phOA==&ratebypass=yes"></audio>
+    <audio id="audio_player" src=""></audio>
+    <div id="shorten_timeline">
+        <div id="timeline"></div>
+        <div class="timeline_marker" id="marker1"></div>
+        <div class="timeline_marker" id="marker2"></div>
+        <div id="timeline_bg">
+        </div>
+    </div> 
     <div id="controls">
         <div id="song_media">
-            <div id="song_cover"></div>
+            <img id="song_cover"></img>
             <div id="song_info">
                 <p id="song_title">Song title</p>
                 <p id="song_artist">Artist</p>
@@ -47,14 +55,13 @@
             <div id="audio_controls">            
                 <img class="icon_audio_player_small icon_audio_player" id="icon_shuffle" src="icons/shuffle.svg" alt="" onclick="activate_shuffle()">
                 <img class="icon_audio_player_medium icon_audio_player" src="icons/backward.svg" alt="">
-                <img class="icon_audio_player_big icon_audio_player" id="play/pause" src="icons/pause.svg" alt="" onclick="changeMusicPlayState()">
+                <img class="icon_audio_player_big icon_audio_player" id="play/pause" src="icons/play.svg" alt="" onclick="changeMusicPlayState()">
                 <img class="icon_audio_player_medium icon_audio_player" src="icons/forward.svg" alt="">
                 <img class="icon_audio_player_small icon_audio_player" id="icon_repeat" src="icons/repeat.svg" alt="" onclick="activate_repeat()">
             </div>
-
-
         </div>
         <div id="volume_controls">
+            <img src="icons/shorten.svg" class="icon_audio_player_small" id="shorten_icon" onclick="shorten_song()">
             <img src="icons/volume/loud.svg" class="icon_audio_player_small" id="volume_icon" alt="" onclick="mute()">
             <div id="volume_controls_slider_container" onclick="progressbar_click('volume_controls_slider', 'volume_controls_slider_progress')">
                 <div id="volume_controls_slider">
@@ -108,13 +115,17 @@
                 <p class="sidebar_category_small">Live Performances</p>
             </div>
         </div>
-
-
-
-
     </div>
     <div id="content">
-        <input id="search_main" type="text" placeholder="Search..">
+        <div id="search_container">
+            <div id="search_container_bg"></div>
+            <img src="icons/goback.svg" class="icon_small icon_search" alt="">
+            <img src="icons/goforward.svg" class="icon_small icon_search" alt="">
+            <input id="search_main" type="text" placeholder="Search..">
+            <p id="heading_scroll">Heading</p>
+            <button class="artist_page_button_area_play " id="button_scroll1">PLAY</button>
+            <button class="artist_page_button_area_follow " id="button_scroll2">FOLLOW</button>
+        </div>
         
         <div id="artist_page">
             <div id="heading_container">
@@ -123,13 +134,13 @@
                     <div id="artist_page_overlay_main"></div>
                     <div id="artist_page_overlay_bottom"></div>
                 </div>
-                <div id="artist_page_heading">
+                <div id="artist_page_heading_container">
                     <p id="artist_page_artist_status">Artist</p>
-                    <p id="artist_page_heading_text">ARTIST</p>
+                    <p id="artist_page_heading">ARTIST</p>
                 </div>
                 <div id="artist_page_button_area">
-                    <button id="artist_page_button_area_play">PLAY</button>
-                    <button id="artist_page_button_area_follow">FOLLOW</button>
+                    <button class="artist_page_button_area_play">PLAY</button>
+                    <button class="artist_page_button_area_follow">FOLLOW</button>
                 </div>
             </div>
             <div id="artist_page_menu_container">
@@ -138,7 +149,7 @@
                         <p>Overview</p>
                     </div>
                     <div id="menu_item2" class="artist_page_menu_item" onclick="artist_page_pages(2)">
-                        <p>What other fans like</p>
+                        <p>What Other Fans Like</p>
                     </div>
                     <div id="menu_item3" class="artist_page_menu_item" onclick="artist_page_pages(3)">
                         <p>More Information</p>
@@ -238,7 +249,74 @@
                 </div>
             </div> 
             <div id="artist_page_wofl">
-                what other fans like
+                <p>What Other Fans Like</p>
+                <div class="artist_overview_tile">
+                    <div class="artist_overview_tile_item">
+                        <img src="portrait.png" alt="">
+                        <div class="artist_overview_tile_item_overlay">
+                            <img src="icons/play.svg" id="1" alt="" onmouseover="artist_portrait(this, true)", onmouseleave="artist_portrait(this, false)">
+                            <p>Artist</p>
+                        </div>
+                    </div>
+                    <div class="artist_overview_tile_item">
+                        <img src="portrait.png" alt="">
+                        <div class="artist_overview_tile_item_overlay">
+                            <img src="icons/play.svg" id="1" alt="" onmouseover="artist_portrait(this, true)", onmouseleave="artist_portrait(this, false)">
+                            <p>Artist</p>
+                        </div>
+                    </div>
+                    <div class="artist_overview_tile_item">
+                        <img src="portrait.png" alt="">
+                        <div class="artist_overview_tile_item_overlay">
+                            <img src="icons/play.svg" id="1" alt="" onmouseover="artist_portrait(this, true)", onmouseleave="artist_portrait(this, false)">
+                            <p>Artist</p>
+                        </div>
+                    </div>
+                    <div class="artist_overview_tile_item">
+                        <img src="portrait.png" alt="">
+                        <div class="artist_overview_tile_item_overlay">
+                            <img src="icons/play.svg" id="1" alt="" onmouseover="artist_portrait(this, true)", onmouseleave="artist_portrait(this, false)">
+                            <p>Artist</p>
+                        </div>
+                    </div>
+                    <div class="artist_overview_tile_item">
+                        <img src="portrait.png" alt="">
+                        <div class="artist_overview_tile_item_overlay">
+                            <img src="icons/play.svg" id="1" alt="" onmouseover="artist_portrait(this, true)", onmouseleave="artist_portrait(this, false)">
+                            <p>Artist</p>
+                        </div>
+                    </div>
+                    <div class="artist_overview_tile_item">
+                        <img src="portrait.png" alt="">
+                        <div class="artist_overview_tile_item_overlay">
+                            <img src="icons/play.svg" id="1" alt="" onmouseover="artist_portrait(this, true)", onmouseleave="artist_portrait(this, false)">
+                            <p>Artist</p>
+                        </div>
+                    </div>
+                    <div class="artist_overview_tile_item">
+                        <img src="portrait.png" alt="">
+                        <div class="artist_overview_tile_item_overlay">
+                            <img src="icons/play.svg" id="1" alt="" onmouseover="artist_portrait(this, true)", onmouseleave="artist_portrait(this, false)">
+                            <p>Artist</p>
+                        </div>
+                    </div>
+                    <div class="artist_overview_tile_item">
+                        <img src="portrait.png" alt="">
+                        <div class="artist_overview_tile_item_overlay">
+                            <img src="icons/play.svg" id="1" alt="" onmouseover="artist_portrait(this, true)", onmouseleave="artist_portrait(this, false)">
+                            <p>Artist</p>
+                        </div>
+                    </div>
+                    <div class="artist_overview_tile_item">
+                        <img src="portrait.png" alt="">
+                        <div class="artist_overview_tile_item_overlay">
+                            <img src="icons/play.svg" id="1" alt="" onmouseover="artist_portrait(this, true)", onmouseleave="artist_portrait(this, false)">
+                            <p>Artist</p>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
             <div id="artist_page_info">
                 <div id="artist_page_info_pictures">
@@ -252,86 +330,150 @@
             </div>
         </div>
 
-        <div id="search_results"> 
-            <p class="heading_small">Songs</p>
-            <div id="search_list">
-                    <div class="search_list_item">
-                        <div class="search_item_img"></div>
-                        <p class="search_item_p">Name</p>    
-                    </div>
-                    <div class="search_list_item">
-                        <div class="search_item_img"></div>
-                        <p class="search_item_p">Name</p>    
-                    </div>  
-                    <div class="search_list_item">
-                        <div class="search_item_img"></div>
-                        <p class="search_item_p">Name</p>    
-                    </div>
-                    <div class="search_list_item">
-                        <div class="search_item_img"></div>
-                        <p class="search_item_p">Name</p>    
-                    </div>     
+        <div id="search_results">
+            <p class="heading_medium" id="search_results_heading">Search Results</p>
+            <div id="search_results_container">
+                <div>
+                    <p class="heading_small">Songs</p>
+                    <hr>
+                    <div id="search_list">
+                        <div class="search_list_item" onclick="searchPlayTrack(0)">
+                            <img class="search_item_img"></img>
+                            <div>
+                                <p class="search_item_name">Name</p>
+                                <p class="search_item_artist">Artist</p>  
+                            </div>
+                        </div>
+                        <div class="search_list_item" onclick="searchPlayTrack(1)">
+                            <img class="search_item_img"></img>
+                            <div>
+                                <p class="search_item_name">Name</p>
+                                <p class="search_item_artist">Artist</p>  
+                            </div>
+                        </div>
+                        <div class="search_list_item" onclick="searchPlayTrack(2)">
+                            <img class="search_item_img"></img>
+                            <div>
+                                <p class="search_item_name">Name</p>
+                                <p class="search_item_artist">Artist</p>  
+                            </div>
+                        </div>
+                        <div class="search_list_item" onclick="searchPlayTrack(3)">
+                            <img class="search_item_img"></img>
+                            <div>
+                                <p class="search_item_name">Name</p>
+                                <p class="search_item_artist">Artist</p>  
+                            </div>
+                        </div>
+                     </div>
                 </div>
-            <p class="heading_small">Artists</p>
-            <div id="search_list">
-                    <div class="search_list_item">
-                        <div class="search_item_img"></div>
-                        <p class="search_item_p">Name</p>    
+                <div>
+                    <p class="heading_small">Artists</p>
+                    <hr>
+                    <div id="search_list">
+                        <div class="search_list_item">
+                            <img class="search_item_img"></img>
+                            <div>
+                                <p class="search_item_name">Name</p>
+                                <p class="search_item_artist">Artist</p>  
+                            </div>
+                        </div>
+                        <div class="search_list_item">
+                            <img class="search_item_img"></img>
+                            <div>
+                                <p class="search_item_name">Name</p>
+                                <p class="search_item_artist">Artist</p>  
+                            </div>
+                        </div>
+                        <div class="search_list_item">
+                            <img class="search_item_img"></img>
+                            <div>
+                                <p class="search_item_name">Name</p>
+                                <p class="search_item_artist">Artist</p>  
+                            </div>
+                        </div>
+                        <div class="search_list_item">
+                            <img class="search_item_img"></img>
+                            <div>
+                                <p class="search_item_name">Name</p>
+                                <p class="search_item_artist">Artist</p>  
+                            </div>
+                        </div>   
                     </div>
-                    <div class="search_list_item">
-                        <div class="search_item_img"></div>
-                        <p class="search_item_p">Name</p>    
-                    </div>  
-                    <div class="search_list_item">
-                        <div class="search_item_img"></div>
-                        <p class="search_item_p">Name</p>    
-                    </div>
-                    <div class="search_list_item">
-                        <div class="search_item_img"></div>
-                        <p class="search_item_p">Name</p>    
-                    </div>     
                 </div>
-            <p class="heading_small">Albums</p>
-            <div id="search_list">
-                    <div class="search_list_item">
-                        <div class="search_item_img"></div>
-                        <p class="search_item_p">Name</p>    
+                <div>
+                    <p class="heading_small">Albums</p>
+                    <hr>
+                    <div id="search_list">
+                        <div class="search_list_item">
+                            <img class="search_item_img"></img>
+                            <div>
+                                <p class="search_item_name">Name</p>
+                                <p class="search_item_artist">Artist</p>  
+                            </div>
+                        </div>
+                        <div class="search_list_item">
+                            <img class="search_item_img"></img>
+                            <div>
+                                <p class="search_item_name">Name</p>
+                                <p class="search_item_artist">Artist</p>  
+                            </div>
+                        </div>
+                        <div class="search_list_item">
+                            <img class="search_item_img"></img>
+                            <div>
+                                <p class="search_item_name">Name</p>
+                                <p class="search_item_artist">Artist</p>  
+                            </div>
+                        </div>
+                        <div class="search_list_item">
+                            <img class="search_item_img"></img>
+                            <div>
+                                <p class="search_item_name">Name</p>
+                                <p class="search_item_artist">Artist</p>  
+                            </div>
+                        </div>   
                     </div>
-                    <div class="search_list_item">
-                        <div class="search_item_img"></div>
-                        <p class="search_item_p">Name</p>    
-                    </div>  
-                    <div class="search_list_item">
-                        <div class="search_item_img"></div>
-                        <p class="search_item_p">Name</p>    
-                    </div>
-                    <div class="search_list_item">
-                        <div class="search_item_img"></div>
-                        <p class="search_item_p">Name</p>    
-                    </div>     
                 </div>
-            <p class="heading_small">Playlists</p>
-                <div id="search_list">
-                    <div class="search_list_item">
-                        <div class="search_item_img"></div>
-                        <p class="search_item_p">Name</p>    
+                <div>
+                    <p class="heading_small">Playlists</p>
+                    <hr>
+                    <div id="search_list">
+                        <div class="search_list_item">
+                            <img class="search_item_img"></img>
+                            <div>
+                                <p class="search_item_name">Name</p>
+                                <p class="search_item_artist">Artist</p>  
+                            </div>
+                        </div>
+                        <div class="search_list_item">
+                            <img class="search_item_img"></img>
+                            <div>
+                                <p class="search_item_name">Name</p>
+                                <p class="search_item_artist">Artist</p>  
+                            </div>
+                        </div>
+                        <div class="search_list_item">
+                            <img class="search_item_img"></img>
+                            <div>
+                                <p class="search_item_name">Name</p>
+                                <p class="search_item_artist">Artist</p>  
+                            </div>
+                        </div>
+                        <div class="search_list_item">
+                            <img class="search_item_img"></img>
+                            <div>
+                                <p class="search_item_name">Name</p>
+                                <p class="search_item_artist">Artist</p>  
+                            </div>
+                        </div> 
                     </div>
-                    <div class="search_list_item">
-                        <div class="search_item_img"></div>
-                        <p class="search_item_p">Name</p>    
-                    </div>  
-                    <div class="search_list_item">
-                        <div class="search_item_img"></div>
-                        <p class="search_item_p">Name</p>    
-                    </div>
-                    <div class="search_list_item">
-                        <div class="search_item_img"></div>
-                        <p class="search_item_p">Name</p>    
-                    </div>     
                 </div>
+            </div>
+            
         </div>
         <div id="last_searches">
-                <p class="heading_medium">Last Searches</p>
+                <p class="heading_medium" id="last_searches_heading">Last Searches</p>
                 <div id="last_searches_list">
                     <div class="last_searches_list_item">
                         <div class="last_searches_list_item_img"></div>

@@ -16,7 +16,7 @@ function createWindow () {
     width: 1350, 
     height: 850,
     'minWidth': 1150,
-    'minHeight': 550, 
+    'minHeight': 650, 
     titleBarStyle: 'hidden', 
     resizable: true })
 
