@@ -130,7 +130,7 @@
         <div id="artist_page">
             <div id="heading_container">
                 <div id="artist_page_bg_img_container">
-                    <img id="artist_page_bg_img" src="bg.jpg" alt="">
+                    <div id="artist_page_bg_img"></div>
                     <div id="artist_page_overlay_main"></div>
                     <div id="artist_page_overlay_bottom"></div>
                 </div>
@@ -336,7 +336,7 @@
                 <div>
                     <p class="heading_small">Songs</p>
                     <hr>
-                    <div id="search_list">
+                    <div class="search_list" id="search_list_tracks">
                         <div class="search_list_item" onclick="searchPlayTrack(0)">
                             <img class="search_item_img"></img>
                             <div>
@@ -370,33 +370,29 @@
                 <div>
                     <p class="heading_small">Artists</p>
                     <hr>
-                    <div id="search_list">
-                        <div class="search_list_item">
+                    <div class="search_list" id="search_list_artists">
+                        <div class="search_list_item" onclick="openArtistFromSearch(0)">
                             <img class="search_item_img"></img>
                             <div>
                                 <p class="search_item_name">Name</p>
-                                <p class="search_item_artist">Artist</p>  
                             </div>
                         </div>
-                        <div class="search_list_item">
+                        <div class="search_list_item" onclick="openArtistFromSearch(1)">
                             <img class="search_item_img"></img>
                             <div>
                                 <p class="search_item_name">Name</p>
-                                <p class="search_item_artist">Artist</p>  
                             </div>
                         </div>
-                        <div class="search_list_item">
+                        <div class="search_list_item" onclick="openArtistFromSearch(2)">
                             <img class="search_item_img"></img>
                             <div>
                                 <p class="search_item_name">Name</p>
-                                <p class="search_item_artist">Artist</p>  
                             </div>
                         </div>
-                        <div class="search_list_item">
+                        <div class="search_list_item" onclick="openArtistFromSearch(3)">
                             <img class="search_item_img"></img>
                             <div>
                                 <p class="search_item_name">Name</p>
-                                <p class="search_item_artist">Artist</p>  
                             </div>
                         </div>   
                     </div>
@@ -404,7 +400,7 @@
                 <div>
                     <p class="heading_small">Albums</p>
                     <hr>
-                    <div id="search_list">
+                    <div class="search_list">
                         <div class="search_list_item">
                             <img class="search_item_img"></img>
                             <div>
@@ -438,7 +434,7 @@
                 <div>
                     <p class="heading_small">Playlists</p>
                     <hr>
-                    <div id="search_list">
+                    <div class="search_list ">
                         <div class="search_list_item">
                             <img class="search_item_img"></img>
                             <div>

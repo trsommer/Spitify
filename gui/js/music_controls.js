@@ -1,4 +1,3 @@
-
 saved_volume = 0
 repeat = false
 shuffle = false
@@ -9,6 +8,12 @@ nextSong = {
     "coverImg": [],
     "liked":    [],
 }
+
+SongPlaying = {
+    'trackName': "",
+    'artistName': "",
+    'artistID': ""
+} 
 
 currentSong = 0
 
@@ -56,6 +61,9 @@ function playSong(data) {
     var music = document.getElementById('audio_player');
     music.src = data['url']
     playMusic('play/pause')
+    SongPlaying['trackName'] = data['trackName']
+    SongPlaying['artistName'] = data['artistName'][0]
+    SongPlaying['artistID'] = data['artistID']
 }
 
 function pauseMusic(id) {
@@ -259,6 +267,11 @@ function shorten(activated) {
     }
 
 
+}
+
+function artistClick() {
+    artistID = SongPlaying['artistID']
+    return artistID
 }
 
 

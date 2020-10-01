@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
+  "type": "module",
   "scripts": {
     "start": "electron ."
   },
@@ -11,6 +12,8 @@
     "electron": "^1.8.4"
   },
   "dependencies": {
-    "python-shell": "^1.0.8"
+    "python-shell": "^1.0.8",
+    "rxdb": "^9.6.0",
+    "rxjs": "^6.6.3"
   }
 }

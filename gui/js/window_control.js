@@ -1,4 +1,6 @@
 
+headerPosition = 0
+
 var lastPages = []
 
 function loadSite(id, type, url) {
@@ -38,61 +40,33 @@ function disableOtherSites(activeSite) {
 }
 
 function changeHeading(id) {
+
     $(window).scroll(function() {
-        var hT = $('#'+id).offset().top,
-            hH = $('#'+id).outerHeight(),
-            wH = $(window).height(),
-            wS = $(this).scrollTop()+72;
-        if (wS > (hT+hH-wH) && (hT > wS) && (wS+wH > hT+hH)){
-            $( "#heading_scroll" ).animate({
-                opacity: 0,
-                paddingTop: 15
-            }, 100)
+        hT = $('#artist_page_heading').offset().top
+        hH = $('#artist_page_heading').outerHeight()
 
-
-            if (id == 'artist_page_heading') {
-                $( "#button_scroll1" ).animate({
-                    opacity: 0,
-                    paddingTop: 15
-                }, 150)
-                $( "#button_scroll2" ).animate({
-                    opacity: 0,
-                    paddingTop: 15
-                }, 200)
-                $( "#search_container_bg" ).animate({
-                    opacity: 0,
-                }, 50)
-            }
-        } else {
-            $( "#heading_scroll" ).animate({
-                opacity: 1,
-                paddingTop: 0
-            }, 100)
-
-            if (id == 'artist_page_heading') {
-                $( "#button_scroll1" ).animate({
-                    opacity: 1,
-                    paddingTop: 0
-                }, 150)
-                $( "#button_scroll2" ).animate({
-                    opacity: 1,
-                    paddingTop: 0
-                }, 200) 
-                $( "#search_container_bg" ).animate({
-                    opacity: 1,
-                }, 250)
-                
-            }
+        if ($(window).scrollTop() > (hT + hH) && headerPosition == 0){
+            console.log("1");
+            $('#search_container_bg').css('animation-name', 'searchbar_bg_out')
+            $('#heading_scroll').css('animation-name', 'searchbar_items_out')
+            $('#button_scroll1').css('animation-name', 'searchbar_items_out')
+            $('#button_scroll2').css('animation-name', 'searchbar_items_out')
+            headerPosition = 1
+        } else if ($(window).scrollTop() < (hT + hH) && headerPosition == 1) {
+            console.log("2");
+            $('#search_container_bg').css('animation-name', 'searchbar_bg_in')
+            $('#heading_scroll').css('animation-name', 'searchbar_items_in')
+            $('#button_scroll1').css('animation-name', 'searchbar_items_in')
+            $('#button_scroll2').css('animation-name', 'searchbar_items_in')
+            headerPosition = 0
         }
      });
-     search_container
 
 }
 
 function pasteHeading(id) {
     heading = document.getElementById(id).innerHTML
     document.getElementById('heading_scroll').innerHTML = heading
-    console.log(heading)
 }
 
 function menuSlider(slideTo) {
@@ -150,5 +124,16 @@ function artist_portrait(element, on) {
 
     }
 
+
+}
+
+function setContentWidth() {
+    wW = $(window).width()
+    sidebarWidth = $('#sidebar').width()
+    contentWidth = wW - sidebarWidth
+
+    console.log("resize: " + contentWidth);
+
+    $('#content').css('width', contentWidth)
 
 }
